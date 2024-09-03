@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/post/{postSlug}', Show::class)->name('post.show');
+
