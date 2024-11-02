@@ -5,7 +5,7 @@ tasks:
       cp .env.example .env &&
       sed -i "s#APP_URL=http://localhost#APP_URL=$(gp url 8000)#g" .env &&
       sed -i "s#GITPOD_VITE_URL=#GITPOD_VITE_URL=$(gp url 5173)#g" .env &&
-      touch database/database.sqlite &&  # Cria o arquivo do banco de dados SQLite
+      touch database/database.sqlite &&
       composer install --ignore-platform-reqs &&
       php artisan key:generate &&
       sudo apt-get update && \
@@ -13,7 +13,7 @@ tasks:
       sleep 15 && \
       sudo service mysql start && \
       sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS tallcms;" && \
-      sudo mysql -u root -e "GRANT ALL PRIVILEGES ON tallcms.* TO 'root'@'%' IDENTIFIED BY '';" && \
+      sudo mysql -u root -e "GRANT ALL PRIVILEGES ON laravel.* TO 'root'@'localhost' WITH mysql_native_password BY '';" && \
       sudo mysql -u root -e "FLUSH PRIVILEGES;"
       php artisan storage:link &&
       php artisan migrate:fresh --seed &&
