@@ -3,6 +3,7 @@ tasks:
       sudo apt-get update && \
       sudo apt-get install -y mysql-server && \
       sudo service mysql start && \
+      composer install && \
       npm install && \
       npm run build
     command: npm run dev
