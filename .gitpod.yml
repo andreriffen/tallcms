@@ -1,13 +1,25 @@
 tasks:
   - init: |
+      set -e  # Faz com que o script falhe se qualquer comando falhar
+      echo "Atualizando pacotes..."
       sudo apt-get update && \
+      echo "Instalando MySQL Server..."
       sudo apt-get install -y mysql-server && \
+      echo "Iniciando MySQL..."
       sudo service mysql start && \
-      sleep 5 && \  # wait 5 seconds...
+      echo "Aguardando MySQL iniciar..."
+      sleep 5 && \  # espera 5 segundos...
+      echo "Listando bancos de dados..."
       mysql -u root -e "SHOW DATABASES;" && \  
+      echo "Criando banco de dados 'tallcms'..."
       mysql -u root -e "CREATE DATABASE tallcms;" && \  
+      echo "Instalando dependências do Composer..."
       composer install && \
+      echo "Instalando dependências do npm..."
       npm install && \
+      echo "Copiando o arquivo .env..."
       cp .env.example .env && \
+      echo "Executando migrações do banco de dados..."
       php artisan migrate:fresh --seed && \
+      echo "Construindo a aplicação..."
       npm run build
