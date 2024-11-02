@@ -1,28 +1,13 @@
 tasks:
-  - init: |
-      set -e  # Faz com que o script falhe se qualquer comando falhar
-      
-      echo "Atualizando pacotes..."
+  - init: |      
       sudo apt-get update && \
-      
-      echo "Instalando MySQL Server..."
       sudo apt-get install -y mysql-server && \
-      
-      echo "Iniciando MySQL..."
       sudo service mysql start && \
-      
-      echo "Aguardando MySQL iniciar..."
-      sleep 5 && \  # espera 5 segundos...
-      
-      echo "Listando bancos de dados..."
-      mysql -u root -e "SHOW DATABASES;" && \
-      
-      echo "Criando banco de dados 'tallcms'..."
-      mysql -u root -e "CREATE USER 'laravel_user'@'localhost' IDENTIFIED BY 'strong_password'; GRANT ALL PRIVILEGES ON tallcms.* TO 'laravel_user'@'localhost'; FLUSH PRIVILEGES;" && \
-      
-      echo "Instalando dependências do Composer..."
+      sleep 5 && \
+      sudo mysql -u root "SHOW DATABASES;" && \
+      sudo mysql -u root "CREATE DATABASE tallcms" && \
+      sudo mysql -u root "CREATE USER 'laravel_user'@'localhost' IDENTIFIED BY 'strong_password'; GRANT ALL PRIVILEGES ON tallcms.* TO 'laravel_user'@'localhost'; FLUSH PRIVILEGES;" && \
       composer install && \
-      
       echo "Instalando dependências do npm..."
       npm install && \
       
