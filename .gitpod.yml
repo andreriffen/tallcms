@@ -9,14 +9,21 @@ tasks:
       composer install --ignore-platform-reqs
       php artisan key:generate
       php artisan storage:link
+      sudo apt-get update &&
+      sudo apt-get install -y mysql-server &&
+      sudo service mysql start && \
+      mysql -u root -e "CREATE DATABASE IF NOT EXISTS tallcms;" && \
+      mysql -u root -e "GRANT ALL PRIVILEGES ON tallcms.* TO 'root'@'%' IDENTIFIED BY '';" && \
+      mysql -u root -e "FLUSH PRIVILEGES;"
       php artisan migrate:fresh --seed
       php artisan serve
 
   - name: Install Node dependencies and run Vite
     openMode: split-right
     command: |
-      npm install
-      npm run dev
+      npm install &&
+      npm audit fix &&
+      npm run build
 
 ports:
   - port: 5173
