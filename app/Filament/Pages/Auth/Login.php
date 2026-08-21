@@ -11,15 +11,6 @@ use Illuminate\Contracts\Support\Htmlable;
  * */
 class Login extends BasePage
 {
-    public function mount(): void
-    {
-        parent::mount();
-
-        $this->form->fill([
-            'password' => '1234',
-        ]);
-    }
-
     public function form(Form $form): Form
     {
         return $form
