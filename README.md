@@ -27,6 +27,10 @@ This branch preserves the original local-development setup for TallCMS using PHP
    php artisan migrate --seed
    ```
 
+   The seed generates the Filament Shield permissions before creating users.
+   It stops with an explicit error if that generation fails, preventing an
+   apparently empty admin panel caused by missing permissions.
+
 5. Start Laravel or use your preferred local host:
 
    ```sh
