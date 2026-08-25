@@ -1,15 +1,12 @@
 .git
 .idea
 .env
-.env.*
-!.env.example
 vendor
 node_modules
 storage/logs/*
 storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
-storage/app/public/*
 Dockerfile
 docker-compose.yml
 npm-debug.log
